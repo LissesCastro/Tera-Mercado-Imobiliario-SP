@@ -1,4 +1,10 @@
 # Tera-Mercado-Imobiliario-SP
+
+## Documentação em construção
+
+### Os notebooks com os códigos estão disponíveis nesses links:
+- ### [EDA](Codigo_EDA.ipynb)
+- ### [Modelo Preditivo](modelo_preditivo.ipynb)
  
  O mercado imobiliário compreende a venda e locação de milhares de imóveis todos os dias, sob diversas formas de negócio e abrangendo uma quantidade muito diversa de tipologias, além de um público muito variado. Por mais distintas que as pessoas sejam, é seguro afirmar que a grande maioria delas tem de lidar com algum processo de compra, venda, ou aluguel de algum imóvel pelo menos uma vez na vida. 
  
