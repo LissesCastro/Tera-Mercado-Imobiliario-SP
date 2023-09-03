@@ -1,10 +1,21 @@
 # Tera-Mercado-Imobiliario-SP
 
-## Documentação em construção
+- [Tera-Mercado-Imobiliario-SP](#tera-mercado-imobiliario-sp)
+    - [Notebooks com os códigos utilizados:](#notebooks-com-os-códigos-utilizados)
+  - [0. Introdução e problema](#0-introdução-e-problema)
+  - [1. Desenho da solução](#1-desenho-da-solução)
+  - [2. Base de dados trabalhada](#2-base-de-dados-trabalhada)
+  - [3. EDA (Análise Exploratória dos Dados)](#3-eda-análise-exploratória-dos-dados)
+  - [4. Machine Learning para entendimento e previsão dos preços](#4-machine-learning-para-entendimento-e-previsão-dos-preços)
+    - [4.1 Modelo de interpretação do valor do imóvel](#41-modelo-de-interpretação-do-valor-do-imóvel)
+    - [4.2 Modelo de predição do valor do imóvel](#42-modelo-de-predição-do-valor-do-imóvel)
+  - [5. Conclusão](#5-conclusão)
 
-### Os notebooks com os códigos estão disponíveis nesses links:
-- ### [EDA](Codigo_EDA.ipynb)
-- ### [Modelo Preditivo](modelo_preditivo.ipynb)
+
+### Notebooks com os códigos utilizados:
+- ### [EDA](Documentação/Codigo_EDA.md)
+- ### [Modelo Preditivo](Documentação/modelo_preditivo.md)
+  Essas são versões em formato markdown (.md) para melhor visualização na página do portfólio. Os documentos em formato ipynb estão disponíveis no repositório.
  
  ## 0. Introdução e problema
 
