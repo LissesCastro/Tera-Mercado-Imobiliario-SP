@@ -38,7 +38,7 @@ Um dos aspectos fundamentais para o aprendizado supervisionado de Machine Learni
 A base de dados principal utilizada no trabalho contém os lançamentos imobiliários residenciais ocorridos na Região Metropolitana de São Paulo entre 1985 e 2013, os dados foram coletados pela [Empresa Brasileira de Estudos do Patrimônio (EMBRAESP)](https://embraesp.com.br/) e disponibilizados pelo Centro de Estudos da Metrópole da FFLCH/USP (CEM/FFLCH-USP), através do [link](https://centrodametropole.fflch.usp.br/pt-br/node/8403). Esses dados estão, a priori, em formato shapefile — comumente utilizado em trabalhos de georreferenciamento — e a base em CSV foi obtida através da modificação do formato no software QuantumGIS (QGIS).
 
 Os dados obtidos no CEM descrevem um total de 16.935 lançamentos imobiliários no período de estudo, cada um contido em uma linha e 85 colunas, a base original é grande e pode ser obtida, na íntegra, [aqui](https://centrodametropole.fflch.usp.br/pt-br/taxonomy/term/654). Algumas de suas principais features são descritas a seguir:
-![Alt text](Documentação/../principais_features.png)
+![Alt text](Documentação/principais_features.png)
 
 A base de dados da EMBRAESP contém os códigos do setor censitário e área de ponderação, tipicamente utilizados em censos do IBGE, o que permite a obtenção de variáveis externas, típicas dos trabalhos do instituto de pesquisa. Neste trabalho foram concatenados dados do Censo Demográfico de 2010, realizado pelo IBGE e obtidos através do [Base dos Dados](https://basedosdados.org/dataset/br-ibge-censo-demografico?bdm_table=microdados_domicilio_1970); o tratamento dos dados foi realizado em um código à parte, que pode ser visualizado [aqui](CENSO_2010.ipynb), As variáveis obtidas a partir do censo demográfico dizem respeito ao número de domicílios no setor censitário do empreendimento, o tipo de ocupação nesses domicílios (por número de habitantes em unidade), bem como etnia e renda da população.
 
@@ -72,7 +72,7 @@ A exclusão das colunas gera um dataset com 52 features, um número que é consi
 
 Uma última adequação de colunas que cabe mencionar nessa etapa é a modificação dos rótulos das incorporadoras, construtoras e dos agentes de financiamento; o mercado imobiliário na região de São Paulo é considerado muito fragmentado, isso é, ainda que existam grandes empreiteiras, incorporadoras e construtoras, não existem grupos dominantes da produção e os agentes que atuam na construção são numerosos. A verificação da base aponta que existem 3037 entradas diferentes para as empresas responsáveis pela construção dos empreendimentos e 4576 entradas únicas para os nomes das incorporadoras, a averiguação desses dados mostra que, em fato, as maiores construtoras e incorporadoras (em número de empreendimentos lançados) não tem uma quantidade expressiva de lançamentos em relação ao total da base:
 
-![Alt text](Documentação/../maiores_inc_cons.png)
+![Alt text](Documentação/maiores_inc_cons.png)
 
 Como esses dados podem ser importantes para a definição de preços do mercado, uma vez que construtoras e incorporadoras tendem a ter um aporte financeiro maior e condições facilitadas de lançamento, optou-se pela classificação de incorporadoras e construtoras em dois grupos, entre as 50 maiores empresas e as demais.
 
@@ -132,7 +132,7 @@ def plot_bp_variaveis(conjunto, dataframe,resposta, i=0):
         i += 1
 ```
 
-![Alt text](Documentação/../distribuição%20categórica.png)
+![Alt text](Documentação/distribuição%20categórica.png)
 
 A distribuição das variáveis categóricas aponta alguns insights interessantes: primeiro, mostra que algumas categorias, como a zona, o tipo de via e o sistema financeiro, apresentam grande variação no preço do imóvel. As duas primeiras têm relação direta com a localização do empreendimento, no caso da Zona, a diferenciação do preço do imóvel faz total sentido, uma vez que são concedidos incentivos financeiros para a construção a algumas áreas da cidade e restrições em outras, a partir da [Plano Diretor Estratégico (PDE)](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&cd=&ved=2ahUKEwiZnrTN2__9AhVFFbkGHaalDK0QFnoECCUQAQ&url=https%3A%2F%2Fgestaourbana.prefeitura.sp.gov.br%2Fmarco-regulatorio%2Fplano-diretor%2Ftexto-da-lei-ilustrado%2F&usg=AOvVaw0l_ldT6ZmyN-7gG-a4FlI0) do município. Zonas de Estruturação Urbana e próximas aos grandes centros e corredores de mobilidade têm incentivo para o adensamento e a construção acaba se tornando mais rentável. Por outro lado, as Zonas Especiais de Interesse Social (ZEIS), por exemplo, têm um valor de unidade muito menor, uma vez que embora tenham incentivos para construção destinam-se à criação de unidades habitacionais para grupos de baixa renda. Ainda falando sobre localização, os gráficos indicam que o distrito da cidade tem uma grande relação com o valor do imóvel, mas a leitura é dificultada devido à alta cardinalidade dos dados.
 
@@ -140,7 +140,7 @@ O sistema financeiro é outra variável que apresenta grande distinção em rela
 
 Verificando os valores numéricos, a inspeção da base aponta irregularidade na distribuição dos dados para uma série de variáveis, grande parte dos histogramas visualizados tem cauda alongada para a direita, o que aponta uma diferença muito grande entre a grande maioria das observações (seguramente as entre o primeiro e terceiro quartil) e os valores máximos encontrados na base. Para várias dessas colunas os valores mais altos são relacionados a lançamentos de mercado de luxo e são outliers, pois são discrepantes ao resto da base, mas acabam por influenciar a média de toda a distribuição para cima, a averiguação dessa discrepância dos dados é possível através da verificação da diferença entre média e mediana.
 
-![Alt text](Documentação/../distribuições%20numéricas.png)
+![Alt text](Documentação/distribuições%20numéricas.png)
 
 Tomando o caso da área, por exemplo, a média aponta 102.15m² por unidade, mas na mediana esse valor é consideravelmente menor, 74m², essa discrepância se dá porque existem alguns apartamentos muito grandes, o maior apartamento da base tem 1925m². Falando sobre a variável resposta, essa apresenta valor médio de R$656.059,00, no entanto a mediana tem valor consideravelmente menor, R$384.849,00; o valor máximo de uma unidade ultrapassa R$3,1 milhões.
 
@@ -148,7 +148,7 @@ Para a melhor visualização dos gráficos e performance de modelos futuros, os 
 
 Como grande parte dos dados estavam desbalanceados, foram aplicadas transformações logarítmicas nas variáveis de preço, uma vez que essas são as mais interessantes para o entendimento da análise e a criação de modelos, especialmente do modelo de regressão linear que será discutido mais à frente. A inspeção das variáveis logarítmicas mostra que as distribuições ficaram muito mais normalizadas, inclusive a distribuição da variável resposta.
 
-![Alt text](Documentação/../graf_log.png)
+![Alt text](Documentação/graf_log.png)
 
 Por fim, alguns dados temporais e de localização foram agrupados para a melhor visualização das leituras. A análise dos gráficos categóricos indicou uma diferenciação muito grande da variável de análise a partir da localização na cidade, assim, os dados das subprefeituras foram agrupados a partir das regiões da cidade de São Paulo, de modo a melhorar a verificação das diferenças entre os territórios.
 
@@ -180,16 +180,16 @@ df_centro = df.query('REGIAO == "Centro"')
 df_leste2 = df.query('REGIAO == "Leste 2"')
 ```
 
-![Alt text](Documentação/../comp_reg_1.png)
-![Alt text](Documentação/../comp_reg_2.png)
+![Alt text](Documentação/comp_reg_1.png)
+![Alt text](Documentação/comp_reg_2.png)
 
 A visualização desses gráficos explicita a diferenciação dos empreendimentos a partir da localização na cidade de São Paulo. O número de empreendimentos lançados é muito distinto para cada região, com poucos números na região leste 2 e nordeste, os valores de m2 e do empreendimento também acabam sendo menores nessas áreas. Em contraste, regiões como oeste e centro-sul concentram grande número de empreendimentos, com preços mais elevados. As regiões da cidade com maior número de empreendimentos são, também, as com maior renda média dos responsáveis de domicílios.
 
-![Alt text](Documentação/../renda_reg.png)
+![Alt text](Documentação/renda_reg.png)
 
 Cabe, ainda, considerar a variação dos empreendimentos ao longo do tempo, visto o longo período de obtenção dos dados. Pela análise temporal dos dados é possível verificar que o número de empreendimentos cresceu ao longo da série e a tipologia provavelmente foi alterada, aparecendo empreendimentos com menor número de dormitórios e de área útil da unidade. É notória a flutuação no preço do m², que parece entrar em ascensão a partir dos últimos anos da série histórica.
 
-![Alt text](Documentação/../temporais.png)
+![Alt text](Documentação/temporais.png)
 
 Com a correção preliminar da base realizada e as leituras ajudando a interpretar melhor o quadro do mercado imobiliário em São Paulo, é hora de trabalhar os modelos de Machine Learning.
 
@@ -200,16 +200,16 @@ Utilizando a versão logarítmica da variável de preço da unidade para respost
 
 O primeiro modelo foi testado utilizando um conjunto baseline de variáveis, composto pela área total da unidade, o número de dormitórios e o número de banheiros, variáveis fundamentais no entendimento de qualquer unidade habitacional. Os resultados do baseline são apresentados a seguir:
 
-![Alt text](Documentação/../OLS_reg1.png)
+![Alt text](Documentação/OLS_reg1.png)
 
 Todas as variáveis foram consideradas significantes na determinação do preço e o R² aponta que esse conjunto explica cerca 69% da modificação dos preços. É um baseline muito bom a partir dessa métrica, mas tem de ser olhado com cautela: Apesar do ótimo índice, os coeficientes apresentam valores estranhos: o modelo está nos dizendo que o incremento de um dormitório na unidade habitacional diminui o preço da mesma em cerca de 9,6%. Faz sentido? É intuitivo pensar que uma unidade com mais dormitórios será vendida por um maior preço, então o modelo pode estar apresentando algum erro de leitura.
 
 A fim de melhorar as métricas e a interpretação do modelo, foram testadas diversas combinações das variáveis preditoras, esse trabalho foi realizado com o apoio de matrizes de correlação, mas a combinação dos parâmetros foi majoritariamente manual. No melhor teste obtido, o conjunto das variáveis preditivas e o modelo obtido são apresentados a seguir:
 
-![Alt text](Documentação/../vars_ols_reg.png)
+![Alt text](Documentação/vars_ols_reg.png)
 
-![Alt text](Documentação/../OLS_final_1.png)
-![Alt text](Documentação/../OLS_final_2.png)
+![Alt text](Documentação/OLS_final_1.png)
+![Alt text](Documentação/OLS_final_2.png)
 
 Seguindo o modelo, a interpretação Ceteris Paribus das variáveis é:
 - Cada m² de área total construída aumenta o preço do imóvel em cerca de 0.44%
@@ -226,11 +226,11 @@ Seguindo o modelo, a interpretação Ceteris Paribus das variáveis é:
   
 Ao analisar a matriz de correlação das variáveis preditoras, nota-se que as variáveis apresentam um nível razoável de correlação, mas como essas variáveis são consideradas elementares na precificação imobiliária, optou-se por mantê-las. A variável do número de banheiros foi retirada porque sua inserção aumentava largamente o VIF e o índice de colinearidade do modelo, sem apresentar mudança significativa na leitura.
 
-![Alt text](Documentação/../corr_vars.png)
+![Alt text](Documentação/corr_vars.png)
 
 A verificação dos gráficos de validação do modelo de regressão linear indicam que a distribuição é aproximadamente homocedástica, isso é, a dispersão dos erros é relativamente homogênea ao longo do eixo das predições, além disso, distribuição dos resíduos também apresenta distribuição próxima à normalidade. O gráficos da distribuição dos erros apontam que os erros na predição do valor do imóvel são bem altos, esses erros serão minimizados a partir dos modelos de predição.
 
-![Alt text](Documentação/../reg_condicoes.png)
+![Alt text](Documentação/reg_condicoes.png)
 
 ### 4.2 Modelo de predição do valor do imóvel
 
@@ -305,7 +305,7 @@ for algorithm in [ RandomForestRegressor,SGDRegressor, LinearRegression, HistGra
 
 Os valores do RMSE dos modelos baseline são apresentados a seguir, o HistGradientBoostingRegressor adquiriu uma performance notadamente melhor que a dos outros modelos:
 
-![Alt text](Documentação/../baseline_rmse.png)
+![Alt text](Documentação/baseline_rmse.png)
 
 Considerando que os parâmetros podem melhorar significativamente a performance do modelo, foi realizada hiperparametrização a partir dos métodos RandomizedSearchCV e GridSearchCV. Ambos são métodos que testam continuamente conjuntos de parâmetros em um modelo, com a diferença fundamental de que o primeiro testa uma quantidade aleatória de conjuntos, enquanto o segundo testa todos os conjuntos possíveis.
 
@@ -386,9 +386,9 @@ LearningCurveDisplay.from_estimator(best_estimator, **common_params)
 #Plota o gráfico de resíduos
 sns.residplot(x=y_test_tt, y=y_pred)
 ```
-![Alt text](Documentação/../val_model.png)
+![Alt text](Documentação/val_model.png)
 
-![Alt text](Documentação/../r2_per_samples.png)
+![Alt text](Documentação/r2_per_samples.png)
 
 ## 5. Conclusão
 
