@@ -16,8 +16,8 @@
 - ### [EDA](Documentação/Codigo_EDA.md)
 - ### [Modelo Preditivo](Documentação/modelo_preditivo.md)
   Essas são versões em formato markdown (.md) para melhor visualização na página do portfólio. Os documentos em formato ipynb estão disponíveis no repositório.
- 
- # 0. Introdução e problema
+
+## 0. Introdução e problema
 
  O mercado imobiliário compreende a venda e locação de milhares de imóveis todos os dias, sob diversas formas de negócio e abrangendo uma quantidade muito diversa de tipologias, além de um público muito variado. Por mais distintas que as pessoas sejam, é seguro afirmar que a grande maioria delas tem de lidar com algum processo de compra, venda, ou aluguel de algum imóvel pelo menos uma vez na vida.
 
